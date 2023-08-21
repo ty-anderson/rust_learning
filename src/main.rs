@@ -1,6 +1,7 @@
 fn main() {
-     let a = [10, 20, 30, 40, 50];
-     for element in a.iter() {
-         println!("the value is: {}", element);
-     }
- }
+    let x = 42;
+    let y = &x;  // y is a reference to x
+
+    println!("The value of x is {}", x);
+    println!("The value of y is {}", y);
+}
