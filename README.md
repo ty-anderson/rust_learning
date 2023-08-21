@@ -15,21 +15,23 @@
     * [If Expressions](#if-expressions)
     * [Loops](#loops)
     * [Comments](#comments)
+4. [Ownership](#4-ownership)
 
 Official Docs: https://doc.rust-lang.org/book/ch01-03-hello-cargo.html
 
 ## 1. Cargo
 
-Cargo is rusts build system and package manager.  
+Cargo is Rusts build system and package manager.
 
-Create a project with cargo:
+A rust project will have the following files:
+* src/
+  * main.rs
+* Cargo.toml
+* .gitignore
+* .git
 
-```
-cargo new project_name
-cd project_name
-```
-
-This creates a new directory with two files, a directory, and a git repository.
+Create a project in new directory: `cargo new project_name` \
+Create a project in existing directory: `cargo init`
 
 **Cargo.toml** is the config file for your project and looks like this:
 
@@ -101,6 +103,7 @@ On Windows, when the file is compiled, there is a .pdb file created which is deb
 
 <hr>
 
+[TOC](#table-of-contents) 
 ## 3. Rust Language Basics
 
 #### Data Types
@@ -245,36 +248,55 @@ There are 3 kinds of loops:
     }
     ```
 
-   Loop labels help with control flow of multiple loops. The default for break is to break the inner most loop. You can
+   **Loop labels** help with control flow of multiple loops. The default for break is to break the inner most loop. You can
    use loop labels to break out of higher loops within inner loops
     ```rust
     fn main() {
-    let mut count = 0;
-    'outer_loop: loop {
-        println!("Count = {}", count);
-        let mut remaining = 10;
-        
-        loop {
-            count += 1;
-            println!("Loop {} of {}", count, remaining);
-            if count == remaining {
-                break;
-            } else if count == 100 {
-                break 'outer_loop;
+        let mut count = 0;
+        let remaining = 10;
+        'outer_loop: loop {
+            println!("Count = {}", count);
+            loop {
+                count += 1;
+                println!("Loop {} of {}", count, remaining);
+                if count == remaining {
+                    break;
+                } else if count == 100 {
+                    break 'outer_loop;
+                }
             }
         }
+        println!("End of program");
     }
-    println!("End of program");
-} 
     ```
-2. While
-    a. Good for looping until a condition is met.
+   
+2. While - Good for looping until a condition is met.
+    ```rust
+    fn main() {
+        let mut number = 3;
+        while number != 0 {
+            println!("{}!", number);
+            number -= 1;
+        }
+        println!("LIFTOFF!!!");
+    }
+    ```
     
-3. For
-    a. Good for looping through a collection
-		
+3. For - Good for looping through a collection
+    ```rust
+    fn main() {
+        let a = [10, 20, 30, 40, 50];
+        for element in a.iter() {
+            println!("the value is: {}", element);
+        }
+    }
+    ```
+
+### Comments 
+`//` just like javascript
 
 
+<hr>
 
-Comments 
-// just like javascript
+[TOC](#table-of-contents)
+## 4. Ownership
