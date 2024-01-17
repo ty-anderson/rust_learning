@@ -72,7 +72,7 @@ cd project_name
 
 <hr>
 
-[Bank To Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 ## 2. Running a Program - Detailed
 
 ##### Build Process
@@ -112,7 +112,7 @@ On Windows, when the file is compiled, there is a .pdb file created which is deb
 
 <hr>
 
-[Bank To Top](#table-of-contents) 
+[Back to Top](#table-of-contents) 
 ## 3. Rust Language Basics
 
 #### Data Types
@@ -348,7 +348,7 @@ There are 3 kinds of loops:
 
 <hr>
 
-[Bank To Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 ## 4. Ownership
 Three rules of ownership:
 1. Each value in Rust has a variable that’s called its owner.
@@ -551,8 +551,191 @@ fn main() {
 ```
 Data on the stack is very efficient so this is fine.  
 
-[Bank To Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 ## 5. Structs
+
+Structs are sort of like python classes. They are used to create custom data types, they must be declared before use, and they can be mutable or immutable.
+They are good for grouping related data together.
+
+```rust
+struct User {
+    username: String,
+    email: String,
+    sign_in_count: u64,
+    active: bool,
+}
+```
+
+To create an instance of a struct, you can use the curly braces and key value pairs:
+
+```rust
+let user1 = User {
+    email: String::from("user@web.com"),
+    username: String::from("user1"),
+    active: true,
+    sign_in_count: 1,
+};
+
+```
+
+To make mutable, use the mut keyword:
+
+```rust
+let mut user1 = User {
+    ..etc..
+```
+
+Accessing values in a struct is done with dot notation:
+
+```rust
+println!("user1 email: {}", user1.email);
+```
+
+Structs can also have methods, which are created in the impl block:
+
+```rust
+struct Rectangle {
+    width: u32,
+    height: u32
+}
+
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+}
+```
+
+The first parameter of a method is always self.  Self refers to the instance of the struct that the method is being called on.  You can have multiple parameters in a method, but the first one must always be self.
+
+To call a method on a struct, use dot notation:
+
+```rust
+fn main() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 100
+    };
+    println!("The area of rect1 is {}", rect1.area());
+}
+```
+
+
+[Back to Top](#table-of-contents)
+## 6. Enums
+
+Enumerations (or enums) are like structs but different in that they can only be one of a few values.  They are useful for when you want to limit the possible values of a variable.
+
+```rust
+enum IpAddrKind {
+    V4,
+    V6,
+}
+```
+
+To create an instance of an enum, use the double colon syntax:
+
+```rust
+let four = IpAddrKind::V4;
+let six = IpAddrKind::V6;
+```
+
+Enums can also have data associated with them:
+
+```rust
+enum IpAddr {
+    V4(String),
+    V6(String),
+}
+```
+
+To create an instance of an enum with data:
+
+```rust
+let home = IpAddr::V4(String::from("127.0.0.1"));
+let loopback = IpAddr::V6(String::from("::1"));
+```
+
+Enums can also have methods, which are created in the impl block:
+
+```rust
+enum IpAddr {
+    V4(String),
+    V6(String),
+}
+
+impl IpAddr {
+    fn print(&self) {
+        println!("ip address: {}", self.0);
+    }
+}
+```
+
+To call a method on an enum, use dot notation:
+
+```rust
+fn main() {
+    let home = IpAddr::V4(String::from("127.0.0.1"));
+    home.print();
+}
+```
+
+Enums can also have multiple types of data associated with them:
+
+```rust
+enum IpAddr {
+    V4(u8, u8, u8, u8),
+    V6(String),
+}
+```
+
+Once you create an enum, you can use it with pattern matching or the ``let if`` syntax. There are some tricks
+you can use with pattern matching such as ``other => function(other)`` to call a function with the value of other.
+
+[More Here](https://doc.rust-lang.org/book/ch06-02-match.html)
+
+``Option<T>`` is a built-in enum that lets you easily evaluate whether a value is present or not.  It is useful for when you want to return a value or nothing at all.
+
+```rust
+enum Option<T> {
+    Some(T),
+    None,
+}
+```
+
+```rust
+fn divide(numerator: i32, denominator: i32) -> Option<i32> {
+    if denominator == 0 {
+        None
+    } else {
+        Some(numerator / denominator)
+    }
+}
+
+fn main() {
+    let result = divide(10, 2);
+    match result {
+        Some(x) => println!("Result: {}", x),
+        None => println!("Cannot divide by 0"),
+    }
+}
+```
+
+Option<T> will evaluate to either Some(T) or None, but not both! Once you have an Option<T>, 
+you will need to extract the T out to perform operations on it.
+Choices for extracting this data include pattern matching with 
+``match``, ``if let``, or Option methods such as ``.unwrap()``, ``.unwrap_or()``, ``.map()``, and others.
+
+```rust
+let result = divide(10, 0);
+// this will give 0 because the result is None and unwrap_or returns the value or the default given.
+println!("Result: {}", result.unwrap_or(0));
+
+// this will panic because unwrap returns the value or panics if None
+println!("Result: {}", result.unwrap());
+```
+
+
 [Docs](https://doc.rust-lang.org/book/ch05-00-structs.html)
 
 
