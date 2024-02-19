@@ -23,7 +23,11 @@
     * [Dangling References](#dangling-references)
     * [Stack and Heap](#side-note-stack-and-heap)
 5. [Structs](#5-structs)
-    * 
+6. [Enums](#6-enums)
+7. [Managing Projects](#7-managing-projects)
+8. [Collections](#8-collections-data-structures)
+9. [Error Handling](#9-error-handling)
+10. [Generics](#10-generic-types-traits-lifetimes)
 
 Official Docs: https://doc.rust-lang.org/book/ch01-03-hello-cargo.html
 
@@ -738,7 +742,7 @@ println!("Result: {}", result.unwrap());
 
 [Docs](https://doc.rust-lang.org/book/ch05-00-structs.html)
 
-
+[Back to Top](#table-of-contents)
 ## 7. Managing Projects
 
 When building a project its important to organize the code for readability and re-usability.
@@ -760,6 +764,7 @@ Paths: Paths for modules use ``::`` ie ``crate::front_of_house::hosting::add_to_
     To import a module use the keyword ``use`` ie ``use crate::front_of_house::hosting;``
     Modules are set to private by default, use ``pub`` to make them public.
 
+[Back to Top](#table-of-contents)
 ## 8. Collections (data structures)
 
 1. Vector (vec!)
@@ -790,7 +795,7 @@ println!(v.get(2));
 ```
 
 
-
+[Back to Top](#table-of-contents)
 ## 9. Error Handling
 
 There are 2 kinds of error handling:
@@ -814,7 +819,7 @@ fn main() {
 
 The Result type returns either an Ok or an Err type.
 
-
+[Back to Top](#table-of-contents)
 ## 10. Generic Types, Traits, Lifetimes
 
 Generics:
