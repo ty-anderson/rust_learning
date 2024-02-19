@@ -739,3 +739,60 @@ println!("Result: {}", result.unwrap());
 [Docs](https://doc.rust-lang.org/book/ch05-00-structs.html)
 
 
+## 7. Managing Projects
+
+When building a project its important to organize the code for readability and re-usability.
+
+* Packages: A Cargo feature that lets you build, test, and share crates
+* Crates: A tree of modules that produces a library or executable
+* Modules and use: Let you control the organization, scope, and privacy of paths
+* Paths: A way of naming an item, such as a struct, function, or module
+
+Crate: Smallest amount of code the compiler considers at one time. A crate is either a 'binary crate' or a 'library crate'.
+    * A binary crate must have a 'main' function, which is the starting point of the program.
+    * A library crate doesn't need 'main', and its not compiled into an executable. Its meant to share functionality with other projects.
+Package: A package is a rust project that Cargo can manage. A grouping of one or more crates that does things, contains 'Cargo.toml'.
+Modules: A way to group code. A module can either be its own .rs file or a subgroup within a .rs file (called in-line module). 
+    Inline modules are setup similar to functions but use the ``mod`` keyword and can help control privacy.
+    Modules are a good way to group related activities. For example, a car needs to accelerate, brake, steer, and 
+    each of these have different details to make them happen. 
+Paths: Paths for modules use ``::`` ie ``crate::front_of_house::hosting::add_to_waitlist();`` this is like import for python.
+    To import a module use the keyword ``use`` ie ``use crate::front_of_house::hosting;``
+    Modules are set to private by default, use ``pub`` to make them public.
+
+## 8. Collections (data structures)
+
+1. Vector (vec!)
+2. string
+3. Hash map
+
+Vectors detail:
+
+```rust
+// create a vector
+let v: Vec<i32> = Vec::new();
+or
+let v = vec![1,2,3];
+```
+
+Update a vector
+
+```rust
+let mut v = vec![1,2,3];
+v.push(4);
+```
+Get elements from a vector with index or ``get``
+
+```rust
+let mut v = vec![1,2,3];
+println!(v[1]);
+println!(v.get(2));
+```
+
+
+
+## 9. Error Handling
+
+
+
+
