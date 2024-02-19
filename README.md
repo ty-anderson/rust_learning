@@ -793,6 +793,49 @@ println!(v.get(2));
 
 ## 9. Error Handling
 
+There are 2 kinds of error handling:
+1. panic! (unrecoverable)
+2. Result (recoverable)
+
+How to use result:
+
+```rust
+use std::fs::File;
+
+fn main() {
+    let greeting_file_result = File::open("hello.txt");
+
+    let greeting_file = match greeting_file_result {
+        Ok(file) => file,
+        Err(error) => panic!("Problem opening the file: {:?}", error),
+    };
+}
+```
+
+The Result type returns either an Ok or an Err type.
+
+
+## 10. Generic Types, Traits, Lifetimes
+
+Generics:
+If you're creating a function or struct, anything with a data type, you can use generics to make that type variable.
+
+For example:
+
+```rust
+fn largest(list: &[T]) -> &T {
+    let mut largest = &list[0];
+    
+    for item in list{
+        if item > largest {
+            largest = item;
+        }
+    }
+    largest
+}
+```
+
+This function allows for any data type now.
 
 
 
